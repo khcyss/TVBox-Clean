@@ -14,6 +14,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -35,4 +37,5 @@ jobs:
     - name: Sync to Gitee for Fast Domestic Access
       run: |
         git remote add gitee https://khcys:${{ secrets.GITEE_TOKEN }}@gitee.com/khcys/tv.git
+        git fetch --unshallow origin || true
         git push -f gitee HEAD:master
