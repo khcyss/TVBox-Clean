@@ -33,15 +33,6 @@ jobs:
         git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update TVBox Clean Sources" && git push)
 
     - name: Sync to Gitee for Fast Domestic Access
-      uses: Yikun/hub-mirror-action@master
-      with:
-        # Your GitHub repository name (e.g., username/repo)
-        src: github/${{ github.repository_owner }}
-        # Your Gitee repository owner name
-        dst: gitee/${{ github.repository_owner }}
-        # Gitee token from Settings -> Personal Access Tokens
-        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-        dst_token: ${{ secrets.GITEE_TOKEN }}
-        # Exclude other repos, just sync this one
-        static_list: "${{ github.event.repository.name }}"
-        force_update: true
+      run: |
+        git remote add gitee https://khcys:${{ secrets.GITEE_TOKEN }}@gitee.com/khcys/tv.git
+        git push -f gitee HEAD:master
