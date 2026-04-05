@@ -33,7 +33,7 @@ jobs:
         git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update TVBox Clean Sources" && git push)
 
     - name: Sync to Gitee for Fast Domestic Access
-      uses: Yikun/hub-mirror-action@v1.2
+      uses: Yikun/hub-mirror-action@master
       with:
         # Your GitHub repository name (e.g., username/repo)
         src: github/${{ github.repository_owner }}
